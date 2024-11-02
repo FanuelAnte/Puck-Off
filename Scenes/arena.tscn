@@ -1,0 +1,68 @@
+[gd_scene load_steps=7 format=3 uid="uid://cu8i25l3tyckt"]
+
+[ext_resource type="Texture2D" uid="uid://cuxv7appbai5n" path="res://Assets/Images/Exports/Floor.png" id="1_066dw"]
+[ext_resource type="Texture2D" uid="uid://bu178nycuy1yo" path="res://Assets/Images/Exports/FieldMarkings.png" id="2_vqfl5"]
+[ext_resource type="Texture2D" uid="uid://b0pc6ae05qdlb" path="res://Assets/Images/Exports/Border.png" id="3_wasgq"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rgvl5"]
+bounce = 0.5
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mcuwc"]
+size = Vector2(1200, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_82i1t"]
+size = Vector2(2000, 64)
+
+[node name="Arena" type="Node2D"]
+
+[node name="Floor" type="Sprite2D" parent="."]
+z_index = -3
+texture = ExtResource("1_066dw")
+
+[node name="FieldMarkings" type="Sprite2D" parent="."]
+z_index = -3
+texture = ExtResource("2_vqfl5")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_rgvl5")
+
+[node name="Border" type="Sprite2D" parent="StaticBody2D"]
+texture = ExtResource("3_wasgq")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -1016)
+shape = SubResource("RectangleShape2D_mcuwc")
+
+[node name="CollisionShape2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 1016)
+shape = SubResource("RectangleShape2D_mcuwc")
+
+[node name="CollisionShape3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(616, 0)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_82i1t")
+
+[node name="CollisionShape4" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-616, -5.65592e-11)
+rotation = -1.5708
+shape = SubResource("RectangleShape2D_82i1t")
+
+[node name="CollisionShape5" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(-616, -5.65592e-11)
+rotation = -1.5708
+polygon = PackedVector2Array(856, 16.0031, 999.999, 160.004, 1000, 16.0036)
+
+[node name="CollisionShape6" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(472, 8)
+rotation = -1.5708
+polygon = PackedVector2Array(864, 128.003, 1008, 128.004, 1008, -15.9963)
+
+[node name="CollisionShape7" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(-616, 1908.8)
+rotation = -1.5708
+polygon = PackedVector2Array(908.801, 16.0033, 908.8, 160.003, 1052.8, 16.0038)
+
+[node name="CollisionShape8" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(472, 1916.8)
+rotation = -1.5708
+polygon = PackedVector2Array(916.8, 128.003, 1060.8, 128.004, 916.801, -15.9967)

@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://e5hkh4em31ek"]
+
+[ext_resource type="Script" path="res://Scripts/puck.gd" id="1_m3nwm"]
+[ext_resource type="Texture2D" uid="uid://n8e31b1115bg" path="res://Assets/Images/Exports/Puck.png" id="1_x5vt5"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vawho"]
+friction = 0.5
+bounce = 0.5
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yddhx"]
+radius = 24.0208
+
+[node name="Puck" type="RigidBody2D" groups=["puck"]]
+mass = 0.2
+physics_material_override = SubResource("PhysicsMaterial_vawho")
+gravity_scale = 0.0
+linear_damp = 0.05
+script = ExtResource("1_m3nwm")
+
+[node name="PuckSprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture = ExtResource("1_x5vt5")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_yddhx")

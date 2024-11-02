@@ -1,0 +1,13 @@
+{
+  "interfaceFontFamily": "",
+  "textFontFamily": "",
+  "monospaceFontFamily": "",
+  "baseFontSizeAction": true,
+  "accentColor": "#512839",
+  "baseFontSize": 16,
+  "enabledCssSnippets": [
+    "snippet"
+  ],
+  "cssTheme": "Obsidian gruvbox",
+  "theme": "system"
+}

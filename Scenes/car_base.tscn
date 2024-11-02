@@ -1,0 +1,70 @@
+[gd_scene load_steps=8 format=3 uid="uid://c7uj206vl300a"]
+
+[ext_resource type="Texture2D" uid="uid://i1jivjds07yx" path="res://Assets/Images/Exports/Cars.png" id="1_b4bhw"]
+[ext_resource type="Script" path="res://Scripts/car_base.gd" id="1_wftrv"]
+[ext_resource type="PackedScene" uid="uid://vfuutxbcsjo" path="res://Scenes/trail.tscn" id="3_t7ybf"]
+[ext_resource type="PackedScene" uid="uid://dj4ln2uuamw7g" path="res://Scenes/ball_indicator.tscn" id="4_jylo6"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ykmfs"]
+bounce = 0.5
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sojpy"]
+radius = 7.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iwmoc"]
+radius = 2.0
+height = 16.0
+
+[node name="CarBase" type="RigidBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_ykmfs")
+gravity_scale = 0.0
+center_of_mass_mode = 1
+linear_damp = 1.0
+angular_damp = 1.0
+script = ExtResource("1_wftrv")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_b4bhw")
+hframes = 6
+vframes = 2
+frame = 2
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_sojpy")
+
+[node name="CollisionShape2" type="CollisionShape2D" parent="."]
+position = Vector2(0, -13)
+rotation = -1.57079
+shape = SubResource("CapsuleShape2D_iwmoc")
+
+[node name="CenterMarker" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, 3)
+
+[node name="TireTracksParent" type="Node2D" parent="."]
+
+[node name="Marker1" type="Marker2D" parent="TireTracksParent"]
+position = Vector2(-6, -6)
+
+[node name="Trail" parent="TireTracksParent/Marker1" instance=ExtResource("3_t7ybf")]
+max_trail_length = 15
+
+[node name="Marker2" type="Marker2D" parent="TireTracksParent"]
+position = Vector2(6, -6)
+
+[node name="Trail2" parent="TireTracksParent/Marker2" instance=ExtResource("3_t7ybf")]
+max_trail_length = 15
+
+[node name="Marker3" type="Marker2D" parent="TireTracksParent"]
+position = Vector2(-6, 8)
+
+[node name="Trail" parent="TireTracksParent/Marker3" instance=ExtResource("3_t7ybf")]
+max_trail_length = 25
+
+[node name="Marker4" type="Marker2D" parent="TireTracksParent"]
+position = Vector2(6, 8)
+
+[node name="Trail2" parent="TireTracksParent/Marker4" instance=ExtResource("3_t7ybf")]
+max_trail_length = 25
+
+[node name="BallIndicator" parent="." instance=ExtResource("4_jylo6")]

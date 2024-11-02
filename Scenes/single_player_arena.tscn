@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://o2eola0ps8vv"]
+
+[ext_resource type="PackedScene" uid="uid://cu8i25l3tyckt" path="res://Scenes/arena.tscn" id="1_4o6c3"]
+[ext_resource type="PackedScene" uid="uid://c7uj206vl300a" path="res://Scenes/car_base.tscn" id="1_p6swa"]
+[ext_resource type="PackedScene" uid="uid://cqorc0qwbsdxy" path="res://Scenes/camera.tscn" id="3_3cime"]
+[ext_resource type="PackedScene" uid="uid://e5hkh4em31ek" path="res://Scenes/puck.tscn" id="4_g5e5i"]
+[ext_resource type="PackedScene" uid="uid://fiiujqrl1066" path="res://Scenes/goal.tscn" id="5_tfr6w"]
+
+[node name="SinglePlayerArena" type="Node2D"]
+metadata/_edit_vertical_guides_ = [-600.0, 600.0]
+metadata/_edit_horizontal_guides_ = [-1000.0, 1000.0]
+
+[node name="Arena" parent="." instance=ExtResource("1_4o6c3")]
+
+[node name="CarBase" parent="." instance=ExtResource("1_p6swa")]
+is_player = true
+
+[node name="Camera" parent="CarBase" instance=ExtResource("3_3cime")]
+
+[node name="Puck" parent="." instance=ExtResource("4_g5e5i")]
+position = Vector2(0, -129)
+
+[node name="Goal" parent="." instance=ExtResource("5_tfr6w")]
+position = Vector2(0, -784)
+
+[node name="Goal2" parent="." instance=ExtResource("5_tfr6w")]
+position = Vector2(0, 784)
+rotation = -3.14159
