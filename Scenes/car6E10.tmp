@@ -7,8 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dj4ln2uuamw7g" path="res://Scenes/ball_indicator.tscn" id="4_jylo6"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ykmfs"]
-friction = 0.1
-bounce = 0.5
+bounce = 0.75
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sojpy"]
 radius = 7.0
@@ -21,10 +20,8 @@ height = 16.0
 physics_material_override = SubResource("PhysicsMaterial_ykmfs")
 gravity_scale = 0.0
 center_of_mass_mode = 1
-contact_monitor = true
-max_contacts_reported = 50
 linear_damp = 1.0
-angular_damp = 2.0
+angular_damp = 1.0
 script = ExtResource("1_wftrv")
 
 [node name="Camera" parent="." instance=ExtResource("2_6ak6t")]
@@ -46,6 +43,7 @@ shape = SubResource("CapsuleShape2D_iwmoc")
 
 [node name="CenterMarker" type="Marker2D" parent="."]
 unique_name_in_owner = true
+position = Vector2(0, 3)
 
 [node name="TireTracksParent" type="Node2D" parent="."]
 
@@ -63,10 +61,4 @@ max_trail_length = 25
 
 [node name="BallIndicator" parent="." instance=ExtResource("4_jylo6")]
 
-[node name="StallTimer" type="Timer" parent="."]
-unique_name_in_owner = true
-one_shot = true
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="zoom_camera" from="." to="." method="_on_zoom_camera"]
-[connection signal="timeout" from="StallTimer" to="." method="_on_stall_timer_timeout"]

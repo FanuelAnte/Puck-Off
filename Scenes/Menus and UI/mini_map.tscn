@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://co16d3c2h0wxf"]
+
+[ext_resource type="Script" path="res://Scripts/mini_map.gd" id="1_6vtu1"]
+[ext_resource type="Texture2D" uid="uid://ji2fnw8vgkn4" path="res://Assets/Images/Exports/MiniMap.png" id="1_pomw8"]
+[ext_resource type="Texture2D" uid="uid://boou74rcnte5x" path="res://Assets/Images/Exports/MiniMapIcons.png" id="2_17d7b"]
+
+[node name="MiniMap" type="MarginContainer"]
+offset_right = 30.0
+offset_bottom = 50.0
+script = ExtResource("1_6vtu1")
+
+[node name="Grid" type="NinePatchRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_pomw8")
+
+[node name="PuckIcon" type="Sprite2D" parent="Background"]
+unique_name_in_owner = true
+visible = false
+texture = ExtResource("2_17d7b")
+hframes = 3
+
+[node name="DarkIcon" type="Sprite2D" parent="Background"]
+unique_name_in_owner = true
+visible = false
+texture = ExtResource("2_17d7b")
+hframes = 3
+frame = 1
+
+[node name="LightIcon" type="Sprite2D" parent="Background"]
+unique_name_in_owner = true
+visible = false
+texture = ExtResource("2_17d7b")
+hframes = 3
+frame = 2
+
+[node name="Icons" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 2

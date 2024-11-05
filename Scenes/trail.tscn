@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://Scripts/trail.gd" id="1_ggk7j"]
 
 [sub_resource type="Curve" id="Curve_ptojw"]
-_data = [Vector2(0.3, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.9), 0.0, 0.0, 0, 0]
-point_count = 2
+_data = [Vector2(0, 0), 0.0, -0.0939954, 0, 0, Vector2(0.5, 0.4), 1.38538, 1.38538, 0, 0, Vector2(1, 0.8), -0.231208, 0.0, 0, 0]
+point_count = 3
 metadata/_snap_enabled = true
 
 [node name="Trail" type="Line2D"]

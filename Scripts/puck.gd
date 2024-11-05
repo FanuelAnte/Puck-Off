@@ -6,4 +6,5 @@ func _ready() -> void:
 	pass
 	
 func _process(delta: float) -> void:
-	puck_sprite.global_rotation = 0  
+	puck_sprite.global_rotation = 0
+	Globals.puck_speed = snapped(linear_velocity.length(), 1)

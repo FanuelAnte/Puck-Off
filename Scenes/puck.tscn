@@ -4,14 +4,14 @@
 [ext_resource type="Texture2D" uid="uid://n8e31b1115bg" path="res://Assets/Images/Exports/Puck.png" id="1_x5vt5"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vawho"]
-friction = 0.5
-bounce = 0.5
+friction = 0.1
+bounce = 0.8
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yddhx"]
 radius = 24.0208
 
-[node name="Puck" type="RigidBody2D" groups=["puck"]]
-mass = 0.2
+[node name="Puck" type="RigidBody2D" groups=["minimap_objects", "puck"]]
+mass = 0.1
 physics_material_override = SubResource("PhysicsMaterial_vawho")
 gravity_scale = 0.0
 linear_damp = 0.05
@@ -22,4 +22,5 @@ unique_name_in_owner = true
 texture = ExtResource("1_x5vt5")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_yddhx")

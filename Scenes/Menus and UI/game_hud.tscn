@@ -1,0 +1,136 @@
+[gd_scene load_steps=5 format=3 uid="uid://dvrd0qufg66fe"]
+
+[ext_resource type="Texture2D" uid="uid://dy2m7h0hiqukx" path="res://Assets/Images/Exports/HUDBorder.png" id="1_4v0fy"]
+[ext_resource type="Theme" uid="uid://bnf3mbkfba2ns" path="res://Assets/Themes/main_theme.tres" id="1_6xj3e"]
+[ext_resource type="Script" path="res://Scripts/game_hud.gd" id="2_pnuaq"]
+[ext_resource type="PackedScene" uid="uid://co16d3c2h0wxf" path="res://Scenes/Menus and UI/mini_map.tscn" id="4_ntiwu"]
+
+[node name="GameHUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_6xj3e")
+script = ExtResource("2_pnuaq")
+
+[node name="Border" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_4v0fy")
+
+[node name="Score" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 83.0
+offset_bottom = 14.0
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="DarkTeamScoreLbl2" type="Label" parent="Score"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.439216, 0.419608, 0.4, 1)
+theme_override_font_sizes/font_size = 6
+text = "00"
+
+[node name="Dash" type="Label" parent="Score"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.658824, 0.623529, 0.580392, 1)
+theme_override_font_sizes/font_size = 6
+text = "-"
+
+[node name="LightTeamScoreLbl" type="Label" parent="Score"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.878431, 0.858824, 0.803922, 1)
+theme_override_font_sizes/font_size = 6
+text = "00"
+
+[node name="CarSpeed" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -14.0
+offset_right = 111.0
+offset_bottom = -2.0
+grow_vertical = 0
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="CarSpeedTextLbl" type="Label" parent="CarSpeed"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.439216, 0.419608, 0.4, 1)
+theme_override_font_sizes/font_size = 6
+text = "Car Speed"
+
+[node name="CarSpeedLbl" type="Label" parent="CarSpeed"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.878431, 0.858824, 0.803922, 1)
+theme_override_font_sizes/font_size = 6
+text = "000 u"
+
+[node name="PuckSpeed" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -153.0
+offset_top = 2.0
+offset_right = -44.0
+offset_bottom = 14.0
+grow_horizontal = 0
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="PuckSpeedTextLbl" type="Label" parent="PuckSpeed"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.439216, 0.419608, 0.4, 1)
+theme_override_font_sizes/font_size = 6
+text = "Puck Speed"
+
+[node name="PuckSpeedLbl" type="Label" parent="PuckSpeed"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.878431, 0.858824, 0.803922, 1)
+theme_override_font_sizes/font_size = 6
+text = "000 u"
+
+[node name="Time" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -95.0
+offset_top = -14.0
+offset_right = -3.0
+offset_bottom = -2.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="TimeTextLbl" type="Label" parent="Time"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.439216, 0.419608, 0.4, 1)
+theme_override_font_sizes/font_size = 6
+text = "Time"
+
+[node name="TimeLbl" type="Label" parent="Time"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.878431, 0.858824, 0.803922, 1)
+theme_override_font_sizes/font_size = 6
+text = "00:00:00"
+
+[node name="MiniMap" parent="." instance=ExtResource("4_ntiwu")]
+layout_mode = 0
+offset_left = 368.0
+offset_top = 2.0
+offset_right = 398.0
+offset_bottom = 52.0

@@ -1,9 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://dl2g1ib21t3gi"]
+[gd_scene load_steps=3 format=3 uid="uid://dl2g1ib21t3gi"]
 
 [ext_resource type="PackedScene" uid="uid://o2eola0ps8vv" path="res://Scenes/single_player_arena.tscn" id="1_0eqq0"]
+[ext_resource type="PackedScene" uid="uid://dvrd0qufg66fe" path="res://Scenes/Menus and UI/game_hud.tscn" id="2_o2vt3"]
 
 [node name="MainGame" type="Node2D"]
 
 [node name="GameplayManager" type="Node2D" parent="."]
 
 [node name="SinglePlayerArena" parent="GameplayManager" instance=ExtResource("1_0eqq0")]
+
+[node name="UIAndMenuManager" type="CanvasLayer" parent="."]
+
+[node name="GameHUD" parent="UIAndMenuManager" instance=ExtResource("2_o2vt3")]

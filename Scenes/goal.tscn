@@ -3,8 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://c0x000kesjx10" path="res://Assets/Images/Exports/Goal.png" id="1_e6eho"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_e78co"]
-rough = true
-bounce = 0.3
+friction = 0.2
+bounce = 0.5
 
 [node name="Goal" type="StaticBody2D"]
 physics_material_override = SubResource("PhysicsMaterial_e78co")
