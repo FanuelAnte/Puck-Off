@@ -22,15 +22,16 @@ offset_bottom = 40.0
 texture = ExtResource("1_4v0fy")
 
 [node name="Score" type="HBoxContainer" parent="."]
-layout_mode = 0
+layout_mode = 1
 offset_left = 2.0
 offset_top = 2.0
-offset_right = 83.0
+offset_right = 81.0
 offset_bottom = 14.0
 theme_override_constants/separation = 16
 alignment = 1
 
 [node name="DarkTeamScoreLbl2" type="Label" parent="Score"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.439216, 0.419608, 0.4, 1)
 theme_override_font_sizes/font_size = 6
@@ -43,62 +44,11 @@ theme_override_font_sizes/font_size = 6
 text = "-"
 
 [node name="LightTeamScoreLbl" type="Label" parent="Score"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.878431, 0.858824, 0.803922, 1)
 theme_override_font_sizes/font_size = 6
 text = "00"
-
-[node name="CarSpeed" type="HBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = -14.0
-offset_right = 111.0
-offset_bottom = -2.0
-grow_vertical = 0
-theme_override_constants/separation = 16
-alignment = 1
-
-[node name="CarSpeedTextLbl" type="Label" parent="CarSpeed"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.439216, 0.419608, 0.4, 1)
-theme_override_font_sizes/font_size = 6
-text = "Car Speed"
-
-[node name="CarSpeedLbl" type="Label" parent="CarSpeed"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0.878431, 0.858824, 0.803922, 1)
-theme_override_font_sizes/font_size = 6
-text = "000 u"
-
-[node name="PuckSpeed" type="HBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -153.0
-offset_top = 2.0
-offset_right = -44.0
-offset_bottom = 14.0
-grow_horizontal = 0
-theme_override_constants/separation = 16
-alignment = 1
-
-[node name="PuckSpeedTextLbl" type="Label" parent="PuckSpeed"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.439216, 0.419608, 0.4, 1)
-theme_override_font_sizes/font_size = 6
-text = "Puck Speed"
-
-[node name="PuckSpeedLbl" type="Label" parent="PuckSpeed"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0.878431, 0.858824, 0.803922, 1)
-theme_override_font_sizes/font_size = 6
-text = "000 u"
 
 [node name="Time" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -107,22 +57,17 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -95.0
-offset_top = -14.0
-offset_right = -3.0
+offset_left = -81.0
+offset_top = -12.0
+offset_right = -2.0
 offset_bottom = -2.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="TimeTextLbl" type="Label" parent="Time"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.439216, 0.419608, 0.4, 1)
-theme_override_font_sizes/font_size = 6
-text = "Time"
-
 [node name="TimeLbl" type="Label" parent="Time"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.878431, 0.858824, 0.803922, 1)
 theme_override_font_sizes/font_size = 6

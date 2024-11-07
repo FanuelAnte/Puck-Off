@@ -1,10 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://c7uj206vl300a"]
+[gd_scene load_steps=11 format=3 uid="uid://c7uj206vl300a"]
 
 [ext_resource type="Texture2D" uid="uid://i1jivjds07yx" path="res://Assets/Images/Exports/Cars.png" id="1_b4bhw"]
 [ext_resource type="Script" path="res://Scripts/car_base.gd" id="1_wftrv"]
 [ext_resource type="PackedScene" uid="uid://cqorc0qwbsdxy" path="res://Scenes/camera.tscn" id="2_6ak6t"]
 [ext_resource type="PackedScene" uid="uid://vfuutxbcsjo" path="res://Scenes/trail.tscn" id="3_t7ybf"]
 [ext_resource type="PackedScene" uid="uid://dj4ln2uuamw7g" path="res://Scenes/ball_indicator.tscn" id="4_jylo6"]
+[ext_resource type="Texture2D" uid="uid://cak3sr0yxf3wr" path="res://Assets/Images/Exports/StallProgressBarU.png" id="6_iqoix"]
+[ext_resource type="Texture2D" uid="uid://33xsj3q2tie8" path="res://Assets/Images/Exports/StallProgressBarP.png" id="7_4tk2r"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ykmfs"]
 friction = 0.1
@@ -65,7 +67,20 @@ max_trail_length = 25
 
 [node name="StallTimer" type="Timer" parent="."]
 unique_name_in_owner = true
+wait_time = 1.5
 one_shot = true
+
+[node name="StallProgressBar" type="TextureProgressBar" parent="."]
+unique_name_in_owner = true
+visible = false
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+value = 34.0
+fill_mode = 4
+texture_under = ExtResource("6_iqoix")
+texture_progress = ExtResource("7_4tk2r")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="zoom_camera" from="." to="." method="_on_zoom_camera"]

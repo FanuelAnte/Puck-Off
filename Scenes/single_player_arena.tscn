@@ -15,7 +15,7 @@ metadata/_edit_horizontal_guides_ = [-1000.0, 1000.0]
 is_player = true
 
 [node name="Puck" parent="." instance=ExtResource("4_g5e5i")]
-position = Vector2(0, -129)
+position = Vector2(0, -773)
 
 [node name="Goal" parent="." instance=ExtResource("5_tfr6w")]
 position = Vector2(0, -784)
