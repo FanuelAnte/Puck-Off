@@ -55,16 +55,30 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "HUD.md",
+                "file": "Overview.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "HUD"
+              "title": "Overview"
+            }
+          },
+          {
+            "id": "ef46b1a13d8a97b3",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Cars.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Cars"
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -205,12 +219,13 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "0bd1327c079a41d9",
+  "active": "ef46b1a13d8a97b3",
   "lastOpenFiles": [
-    "To-Dos.md",
-    "HUD.md",
-    "Project Structure.md",
     "Overview.md",
+    "Cars.md",
+    "HUD.md",
+    "To-Dos.md",
+    "Project Structure.md",
     "Lessons Learned.md"
   ]
 }

@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://c0x000kesjx10" path="res://Assets/Images/Exports/Goal.png" id="1_e6eho"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_e78co"]
-friction = 0.2
+friction = 0.3
 bounce = 0.5
 
 [node name="Goal" type="StaticBody2D"]
@@ -17,5 +17,12 @@ texture = ExtResource("1_e6eho")
 [node name="CollisionPolygon" type="CollisionPolygon2D" parent="Area2D"]
 polygon = PackedVector2Array(-61, -16, -61, -12, 61, -12, 61, -16, 44, -33, -44, -33)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+[node name="CollisionPolygon" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-63, 36, -61, 36, -61, -16, -44, -33, 44, -33, 61, -16, 61, 36, 63, 36, 63, -17, 45, -35, -45, -35, -63, -17)
+
+[node name="LineCollision" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionPolygon" type="CollisionPolygon2D" parent="LineCollision"]
+polygon = PackedVector2Array(-62, 35, 62, 35, 62, 37, -62, 37)

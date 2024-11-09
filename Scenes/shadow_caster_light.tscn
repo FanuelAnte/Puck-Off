@@ -1,0 +1,70 @@
+[gd_scene load_steps=8 format=3 uid="uid://b4ktg600sax46"]
+
+[ext_resource type="Script" path="res://Scripts/shadow_caster_light.gd" id="1_j6gq3"]
+
+[sub_resource type="Gradient" id="Gradient_rxhfy"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.12766)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_pnwsp"]
+gradient = SubResource("Gradient_rxhfy")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_hqvue"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.265957)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1wm27"]
+gradient = SubResource("Gradient_hqvue")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="Gradient" id="Gradient_lijhc"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.420213)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_uwdah"]
+gradient = SubResource("Gradient_lijhc")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 0)
+
+[node name="ShadowCasterLight" type="Node2D"]
+light_mask = 3
+visibility_layer = 3
+script = ExtResource("1_j6gq3")
+
+[node name="LightClose" type="PointLight2D" parent="."]
+unique_name_in_owner = true
+light_mask = 3
+visibility_layer = 3
+blend_mode = 2
+range_item_cull_mask = 2
+texture = SubResource("GradientTexture2D_pnwsp")
+
+[node name="LightFar" type="PointLight2D" parent="."]
+unique_name_in_owner = true
+light_mask = 3
+visibility_layer = 3
+blend_mode = 2
+range_item_cull_mask = 4
+texture = SubResource("GradientTexture2D_1wm27")
+
+[node name="LightFarthest" type="PointLight2D" parent="."]
+unique_name_in_owner = true
+light_mask = 3
+visibility_layer = 3
+blend_mode = 2
+range_item_cull_mask = 8
+texture = SubResource("GradientTexture2D_uwdah")

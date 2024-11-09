@@ -15,10 +15,17 @@ grow_vertical = 2
 theme = ExtResource("1_6xj3e")
 script = ExtResource("2_pnuaq")
 
+[node name="MiniMap" parent="." instance=ExtResource("4_ntiwu")]
+layout_mode = 0
+offset_left = 368.0
+offset_top = 2.0
+offset_right = 398.0
+offset_bottom = 52.0
+
 [node name="Border" type="TextureRect" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 400.0
+offset_bottom = 240.0
 texture = ExtResource("1_4v0fy")
 
 [node name="Score" type="HBoxContainer" parent="."]
@@ -72,10 +79,3 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.878431, 0.858824, 0.803922, 1)
 theme_override_font_sizes/font_size = 6
 text = "00:00:00"
-
-[node name="MiniMap" parent="." instance=ExtResource("4_ntiwu")]
-layout_mode = 0
-offset_left = 368.0
-offset_top = 2.0
-offset_right = 398.0
-offset_bottom = 52.0

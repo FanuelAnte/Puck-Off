@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="car_resource" load_steps=3 format=3 uid="uid://cc4lj0qtatwd"]
+
+[ext_resource type="Script" path="res://Assets/Resources/car_resource.gd" id="1_qk5cb"]
+
+[sub_resource type="Curve" id="Curve_sb1j1"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1e-05, 0), 2.74616, 2.74616, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+metadata/_snap_enabled = true
+
+[resource]
+script = ExtResource("1_qk5cb")
+car_name = "Charger"
+engine_power = 600
+boost_engine_power = 2400
+max_speed = 350
+boost_max_speed = 600
+turn_speed = 1200
+steering_graph = SubResource("Curve_sb1j1")
+collider_height = 32
+bumper_collider_position = Vector2(0, -14)
+center_of_mass_position = Vector2(0, 3)
+bumper_collider_height = 18
+car_sprite = 0

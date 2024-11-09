@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="car_resource" load_steps=3 format=3 uid="uid://b4qsoftsu6a7d"]
+
+[ext_resource type="Script" path="res://Assets/Resources/car_resource.gd" id="1_5x3j7"]
+
+[sub_resource type="Curve" id="Curve_5axiq"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1e-05, 0), 2.74616, 2.74616, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+metadata/_snap_enabled = true
+
+[resource]
+script = ExtResource("1_5x3j7")
+car_name = "GTI"
+engine_power = 600
+boost_engine_power = 2400
+max_speed = 350
+boost_max_speed = 600
+turn_speed = 1000
+steering_graph = SubResource("Curve_5axiq")
+collider_height = 26
+bumper_collider_position = Vector2(0, -11)
+center_of_mass_position = Vector2(0, 2)
+bumper_collider_height = 16
+car_sprite = 1

@@ -1,7 +1,7 @@
 What needs to be shown?
 - Score
 - ~~Puck Speed~~
-- Player Speed
+- ~~Player Speed~~
 - Mini-map
-- Stalled State
+- ~~Stalled State~~
 - Time Remaining

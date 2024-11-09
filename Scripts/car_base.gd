@@ -4,8 +4,13 @@ extends RigidBody2D
 @onready var center_marker: Marker2D = %CenterMarker
 @onready var stall_timer: Timer = %StallTimer
 @onready var stall_progress_bar: TextureProgressBar = %StallProgressBar
+@onready var car_sprite: Sprite2D = %CarSprite
+@onready var body_collision_shape: CollisionShape2D = %BodyCollisionShape
+@onready var bumper_collision_shape: CollisionShape2D = %BumperCollisionShape
 
 @export var is_player: bool = false
+@export var car_resource_file: Resource
+@export_enum("Dark", "Light") var team_color: String
 
 signal zoom_camera(zoom_value: Vector2)
 
@@ -31,16 +36,26 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 		state.linear_velocity = state.linear_velocity.normalized() * max_speed
 
 func _ready() -> void:
-	center_of_mass = center_marker.position
+	center_of_mass = car_resource_file.center_of_mass_position
+	
+	if team_color == "Dark":
+		car_sprite.frame = car_resource_file.car_sprite + 6
+	elif team_color == "Light":
+		car_sprite.frame = car_resource_file.car_sprite
+		
+	body_collision_shape.shape.set_height(car_resource_file.collider_height)
+	bumper_collision_shape.shape.set_height(car_resource_file.bumper_collider_height)
+	bumper_collision_shape.position = car_resource_file.bumper_collider_position
 	
 func _physics_process(delta: float) -> void:
 	get_input(delta)
 	apply_central_force(velocity)
 	
 	var normalized_speed: float = snapped(remap(linear_velocity.length(), 0, max_speed, 0, 1), 0.01)
+	var dynamic_steering_factor: float = snapped(car_resource_file.steering_graph.sample(normalized_speed), 0.01)
 	
 	if linear_velocity.length() > 15:
-		apply_torque(turn_direction * turn_speed * normalized_speed)
+		apply_torque(turn_direction * turn_speed * dynamic_steering_factor)
 	else:
 		angular_velocity = 0
 	
@@ -58,7 +73,7 @@ func _process(delta: float) -> void:
 		
 	puck_position = get_tree().get_nodes_in_group("puck")[0].global_position
 	
-	if is_player:
+	if is_player and Globals.dynamic_zooming:
 		if clamp(linear_velocity.length(), 0, max_speed) > (max_speed)/2:
 			if !has_zoomed_out:
 				emit_signal("zoom_camera", Vector2(0.5, 0.5))
@@ -114,7 +129,7 @@ func _on_stall_timer_timeout() -> void:
 	has_stalled = false
 	angular_damp = 2
 	linear_damp = 1
-
+	
 func _on_body_entered(body: Node) -> void:
 	var shake_factor: float = 0
 	
@@ -130,5 +145,5 @@ func _on_body_entered(body: Node) -> void:
 			if linear_velocity.length() > (max_speed * 0.5):
 				has_stalled = true
 				angular_damp = 10
-				linear_damp = 2
+				linear_damp = 3
 				stall_timer.start()

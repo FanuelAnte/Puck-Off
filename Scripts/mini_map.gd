@@ -27,6 +27,30 @@ func update_objects_list() -> void:
 			icons.add_child(new_marker)
 			new_marker.show()
 			markers[object] = new_marker
+			
+		elif object.is_in_group("car"):
+			if object.team_color == "Dark":
+				var new_marker: Sprite2D
+				new_marker = icons_list["dark_team"].duplicate()
+				#if object.is_player:
+					#new_marker = icons["red_team_player"].duplicate()
+				#else:
+					#new_marker = icons["red_team"].duplicate()
+					
+				icons.add_child(new_marker)
+				new_marker.show()
+				markers[object] = new_marker
+			elif object.team_color == "Light":
+				var new_marker: Sprite2D
+				new_marker = icons_list["light_team"].duplicate()
+				#if object.is_player:
+					#new_marker = icons["blue_team_player"].duplicate()
+				#else:
+					#new_marker = icons["blue_team"].duplicate()
+					
+				icons.add_child(new_marker)
+				new_marker.show()
+				markers[object] = new_marker
 	
 func _process(delta: float) -> void:
 	for marker: RigidBody2D in markers:
