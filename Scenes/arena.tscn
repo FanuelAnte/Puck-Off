@@ -51,9 +51,11 @@ material = SubResource("CanvasItemMaterial_k1w5r")
 texture = ExtResource("3_5qi7q")
 
 [node name="Goal" parent="." instance=ExtResource("4_353oq")]
+z_index = 3
 position = Vector2(0, -784)
 
 [node name="Goal2" parent="." instance=ExtResource("4_353oq")]
+z_index = 3
 position = Vector2(0, 784)
 rotation = -3.14159
 

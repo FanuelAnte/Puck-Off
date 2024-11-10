@@ -11,5 +11,5 @@ metadata/_snap_enabled = true
 z_index = -2
 width = 2.0
 width_curve = SubResource("Curve_ptojw")
-default_color = Color(0.439216, 0.419608, 0.4, 1)
+default_color = Color(0.333333, 0.333333, 0.407843, 1)
 script = ExtResource("1_ggk7j")

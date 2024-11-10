@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://dvrd0qufg66fe"]
+[gd_scene load_steps=9 format=3 uid="uid://dvrd0qufg66fe"]
 
 [ext_resource type="Texture2D" uid="uid://dy2m7h0hiqukx" path="res://Assets/Images/Exports/HUDBorder.png" id="1_4v0fy"]
 [ext_resource type="Theme" uid="uid://bnf3mbkfba2ns" path="res://Assets/Themes/main_theme.tres" id="1_6xj3e"]
 [ext_resource type="Script" path="res://Scripts/game_hud.gd" id="2_pnuaq"]
 [ext_resource type="PackedScene" uid="uid://co16d3c2h0wxf" path="res://Scenes/Menus and UI/mini_map.tscn" id="4_ntiwu"]
+[ext_resource type="Texture2D" uid="uid://c0wsi8cbiwago" path="res://Assets/Images/Exports/D-PadButtonN.png" id="5_x8cq7"]
+[ext_resource type="Texture2D" uid="uid://bwn2t0gkklt67" path="res://Assets/Images/Exports/D-PadButtonP.png" id="6_saq3x"]
+[ext_resource type="Texture2D" uid="uid://bmo2v5g1vt5r8" path="res://Assets/Images/Exports/ActionButtonN.png" id="7_ghbbp"]
+[ext_resource type="Texture2D" uid="uid://dy36eiprt65uf" path="res://Assets/Images/Exports/ActionButtonP.png" id="8_pxvvb"]
 
 [node name="GameHUD" type="Control"]
 layout_mode = 3
@@ -40,20 +44,20 @@ alignment = 1
 [node name="DarkTeamScoreLbl2" type="Label" parent="Score"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.439216, 0.419608, 0.4, 1)
+theme_override_colors/font_color = Color(0.333333, 0.333333, 0.407843, 1)
 theme_override_font_sizes/font_size = 6
 text = "00"
 
 [node name="Dash" type="Label" parent="Score"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.658824, 0.623529, 0.580392, 1)
+theme_override_colors/font_color = Color(0.627451, 0.627451, 0.545098, 1)
 theme_override_font_sizes/font_size = 6
 text = "-"
 
 [node name="LightTeamScoreLbl" type="Label" parent="Score"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.878431, 0.858824, 0.803922, 1)
+theme_override_colors/font_color = Color(0.913725, 0.937255, 0.92549, 1)
 theme_override_font_sizes/font_size = 6
 text = "00"
 
@@ -76,6 +80,104 @@ alignment = 1
 [node name="TimeLbl" type="Label" parent="Time"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.878431, 0.858824, 0.803922, 1)
+theme_override_colors/font_color = Color(0.913725, 0.937255, 0.92549, 1)
 theme_override_font_sizes/font_size = 6
 text = "00:00:00"
+
+[node name="DPad" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -48.0
+offset_right = 96.0
+offset_bottom = -16.0
+grow_vertical = 0
+
+[node name="DPadLeft" type="TouchScreenButton" parent="DPad"]
+position = Vector2(0, 32.0002)
+rotation = -1.57079
+texture_normal = ExtResource("5_x8cq7")
+texture_pressed = ExtResource("6_saq3x")
+passby_press = true
+action = "left"
+
+[node name="DPadRight" type="TouchScreenButton" parent="DPad"]
+position = Vector2(80, 0)
+rotation = -4.71238
+texture_normal = ExtResource("5_x8cq7")
+texture_pressed = ExtResource("6_saq3x")
+passby_press = true
+action = "right"
+
+[node name="ActionButtons" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = -94.0
+offset_right = -16.0
+offset_bottom = -24.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="AButton" type="TouchScreenButton" parent="ActionButtons"]
+position = Vector2(0, 30)
+rotation = -1.57079
+texture_normal = ExtResource("7_ghbbp")
+texture_pressed = ExtResource("8_pxvvb")
+passby_press = true
+action = "accelerate"
+
+[node name="ALbl" type="Label" parent="ActionButtons"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 4.0
+offset_top = -17.0
+offset_right = 10.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.129412, 0.117647, 0.12549, 1)
+theme_override_font_sizes/font_size = 6
+text = "A"
+
+[node name="ZButton" type="TouchScreenButton" parent="ActionButtons"]
+position = Vector2(32, 38)
+rotation = -4.71238
+texture_normal = ExtResource("7_ghbbp")
+texture_pressed = ExtResource("8_pxvvb")
+passby_press = true
+action = "decelerate"
+
+[node name="ZLbl" type="Label" parent="ActionButtons"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 4.0
+offset_top = 23.0
+offset_right = 10.0
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.129412, 0.117647, 0.12549, 1)
+theme_override_font_sizes/font_size = 6
+text = "Z"
+
+[connection signal="pressed" from="DPad/DPadLeft" to="." method="_on_d_pad_left_pressed"]
+[connection signal="pressed" from="DPad/DPadRight" to="." method="_on_d_pad_right_pressed"]
+[connection signal="pressed" from="ActionButtons/AButton" to="." method="_on_a_button_pressed"]
+[connection signal="pressed" from="ActionButtons/ZButton" to="." method="_on_z_button_pressed"]

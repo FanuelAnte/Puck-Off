@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cu8i25l3tyckt" path="res://Scenes/arena.tscn" id="1_4o6c3"]
 [ext_resource type="PackedScene" uid="uid://c7uj206vl300a" path="res://Scenes/car_base.tscn" id="1_p6swa"]
-[ext_resource type="Resource" uid="uid://b4qsoftsu6a7d" path="res://Assets/Resources/Cars/GTI.tres" id="3_lcasl"]
+[ext_resource type="Resource" uid="uid://cc4lj0qtatwd" path="res://Assets/Resources/Cars/Charger.tres" id="3_7e7p2"]
 [ext_resource type="PackedScene" uid="uid://e5hkh4em31ek" path="res://Scenes/puck.tscn" id="4_g5e5i"]
 
 [node name="SinglePlayerArena" type="Node2D"]
@@ -16,8 +16,8 @@ metadata/_edit_horizontal_guides_ = [-1000.0, 1000.0]
 [node name="CarBase" parent="DarkTeam" instance=ExtResource("1_p6swa")]
 position = Vector2(0, 646)
 is_player = true
-car_resource_file = ExtResource("3_lcasl")
-team_color = "Dark"
+car_resource_file = ExtResource("3_7e7p2")
+team_color = "Light"
 
 [node name="LightTeam" type="Node2D" parent="."]
 
