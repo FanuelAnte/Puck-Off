@@ -1,12 +1,1 @@
-## Nesting scenes instead of loading whole new ones.
-The scene structure I'm aiming for is as follows:
-
-> Main Game
-> > Audio Manager
-> > UI and Menu Manager
-> > Gameplay Manager Parent
-> > > Single Player Game Manager
-> > > Multiplayer Game Manager
-
-## The Car (Not the Arctic Monkey's Album)
-A rigid body 2D.
+[Diagram](https://app.diagrams.net/#G1TmlmusoDR-ap4zx4fN7ncU8NIhL-sLAA#%7B%22pageId%22%3A%22Wymt35rkSLNK3yVL-jnk%22%7D)

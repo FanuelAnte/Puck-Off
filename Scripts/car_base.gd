@@ -5,8 +5,9 @@ extends RigidBody2D
 @onready var stall_timer: Timer = %StallTimer
 @onready var stall_progress_bar: TextureProgressBar = %StallProgressBar
 @onready var car_sprite: Sprite2D = %CarSprite
-@onready var body_collision_shape: CollisionShape2D = %BodyCollisionShape
-@onready var bumper_collision_shape: CollisionShape2D = %BumperCollisionShape
+@onready var body_collider: CollisionShape2D = %BodyCollider
+@onready var bumper_collider: CollisionShape2D = %BumperCollider
+@onready var chase_timer: Timer = %ChaseTimer
 
 @export var is_player: bool = false
 @export var car_resource_file: Resource
@@ -17,19 +18,24 @@ signal zoom_camera(zoom_value: Vector2)
 var has_zoomed_out: bool = false
 var has_zoomed_in: bool = true
 
-var engine_power: int = 600
-var max_speed: int = 350
 var velocity: Vector2 = Vector2.ZERO
 var turn_direction: int = 0
+
+var can_chase_ball: bool = true
+
+var engine_power: int = 600
+var max_speed: int = 350
 var turn_speed: int = 1200
 
 var is_steering: bool = true
 var has_stalled: bool = false
 
 var right_direction: Vector2
-var lateral_sliding_reduction: float = 0.9
+var max_lateral_sliding_reduction: float = 0
+var lateral_sliding_reduction: float = 0
 
 var puck_position: Vector2
+var center_field_postion: Vector2 = Vector2(0, 0)
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	if state.linear_velocity.length() > max_speed:
@@ -42,10 +48,25 @@ func _ready() -> void:
 		car_sprite.frame = car_resource_file.car_sprite + 6
 	elif team_color == "Light":
 		car_sprite.frame = car_resource_file.car_sprite
-		
-	body_collision_shape.shape.set_height(car_resource_file.collider_height)
-	bumper_collision_shape.shape.set_height(car_resource_file.bumper_collider_height)
-	bumper_collision_shape.position = car_resource_file.bumper_collider_position
+	
+	var body_collider_shape: CapsuleShape2D = CapsuleShape2D.new()
+	body_collider_shape.radius = 7
+	body_collider_shape.height = car_resource_file.collider_height
+	body_collider.shape = body_collider_shape
+	
+	var bumper_collider_shape: CapsuleShape2D = CapsuleShape2D.new()
+	bumper_collider_shape.radius = 2
+	bumper_collider_shape.height = car_resource_file.bumper_collider_height
+	bumper_collider.shape = bumper_collider_shape
+	
+	bumper_collider.position = car_resource_file.bumper_collider_position
+	
+	engine_power = car_resource_file.engine_power
+	max_speed = car_resource_file.max_speed
+	turn_speed = car_resource_file.turn_speed
+	
+	max_lateral_sliding_reduction = car_resource_file.max_lateral_sliding_reduction
+	lateral_sliding_reduction = car_resource_file.max_lateral_sliding_reduction
 	
 func _physics_process(delta: float) -> void:
 	get_input(delta)
@@ -63,7 +84,6 @@ func _physics_process(delta: float) -> void:
 	var lateral_velocity: Vector2 = right_direction * linear_velocity.dot(right_direction)
 	linear_velocity -= lateral_velocity * lateral_sliding_reduction
 	
-	
 func _process(delta: float) -> void:
 	if has_stalled and !stall_timer.is_stopped():
 		stall_progress_bar.show()
@@ -73,7 +93,7 @@ func _process(delta: float) -> void:
 		
 	puck_position = get_tree().get_nodes_in_group("puck")[0].global_position
 	
-	if is_player and Globals.dynamic_zooming:
+	if is_player and SettingsGlobals.dynamic_zooming:
 		if clamp(linear_velocity.length(), 0, max_speed) > (max_speed)/2:
 			if !has_zoomed_out:
 				emit_signal("zoom_camera", Vector2(0.5, 0.5))
@@ -91,29 +111,58 @@ func get_input(delta: float) -> void:
 			if Input.is_action_pressed("accelerate"):
 				velocity = transform.y * engine_power * -1
 			elif Input.is_action_pressed("decelerate"):
-				velocity = transform.y * engine_power * 0.9
+				velocity = transform.y * engine_power * 0.8
 			else:
 				velocity = Vector2.ZERO
 			
 			if Input.is_action_pressed("right"):
 				turn_direction = 1
 				is_steering = true
+				angular_damp = 2
 			elif Input.is_action_pressed("left"):
 				turn_direction = -1
 				is_steering = true
+				angular_damp = 2
 			else:
 				turn_direction = 0
 				is_steering = false
+				angular_damp = 10
 				
 			if Input.is_action_pressed("engage drift"):
-				lateral_sliding_reduction = 0
+				lateral_sliding_reduction = 0.05
 			else:
-				if lateral_sliding_reduction < 0.9:
+				if lateral_sliding_reduction <= max_lateral_sliding_reduction:
 					lateral_sliding_reduction += 0.1 * delta
 		else:
 			velocity = Vector2.ZERO
 			turn_direction = 0
 			
+	else:
+		var direction: Vector2 = center_field_postion - self.global_position
+		
+		if !has_stalled:
+			if (puck_position - self.global_position).length() > 16:
+				if can_chase_ball:
+					direction = (puck_position - self.global_position)
+			else:
+				can_chase_ball = false
+				chase_timer.start(snapped(randf_range(1, 2), 0.05))
+				
+			var angle: int = rad_to_deg(self.transform.y.angle_to(direction) * -1)
+			#print(angle)
+			
+			turn_direction = sign(angle) * 1
+			
+			if abs(angle) >= 160:
+				velocity = transform.y * engine_power * -1
+				
+			elif abs(angle) < 160:
+				velocity = transform.y * engine_power * 0.8
+				
+		else:
+			velocity = Vector2.ZERO
+			turn_direction = 0
+		
 func move_camera(amount: Vector2) -> void:
 	camera.offset = Vector2(randf_range(-amount.x, amount.x), randf_range(-amount.y, amount.y))
 			
@@ -138,12 +187,15 @@ func _on_body_entered(body: Node) -> void:
 	else:
 		shake_factor = remap(linear_velocity.length(), 0, max_speed, 0.5, 1)
 	
-	camera_shake(Globals.shake_length_factor * shake_factor, Globals.shake_power_factor * shake_factor)
+	camera_shake(SettingsGlobals.shake_length_factor * shake_factor, SettingsGlobals.shake_power_factor * shake_factor)
 	
 	if !has_stalled:
 		if !body.is_in_group("puck"):
-			if linear_velocity.length() > (max_speed * 0.5):
+			if linear_velocity.length() > (max_speed * 0.65):
 				has_stalled = true
 				angular_damp = 10
-				linear_damp = 3
+				linear_damp = 2
 				stall_timer.start()
+				
+func _on_chase_timer_timeout() -> void:
+	can_chase_ball = true

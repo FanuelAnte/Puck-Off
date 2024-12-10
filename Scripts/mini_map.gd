@@ -54,7 +54,7 @@ func update_objects_list() -> void:
 	
 func _process(delta: float) -> void:
 	for marker: RigidBody2D in markers:
-		var object_position: Vector2 = marker.position / 40 + grid.size / 2
+		var object_position: Vector2 = marker.position / 20 + grid.size / 2
 		object_position.x = clamp(object_position.x, 0, grid.size.x)
 		object_position.y = clamp(object_position.y, 0, grid.size.y)
 		markers[marker].position = object_position

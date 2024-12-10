@@ -1,1 +1,4 @@
 - [x] Make the car irresponsive for a while after any collision with anything other than the puck.
+- [x] Match timer + display
+- [x] Scoring logic + scoreboard
+- [ ] CPU cars

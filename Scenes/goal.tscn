@@ -1,20 +1,26 @@
-[gd_scene load_steps=3 format=3 uid="uid://fiiujqrl1066"]
+[gd_scene load_steps=5 format=3 uid="uid://fiiujqrl1066"]
 
 [ext_resource type="Texture2D" uid="uid://c0x000kesjx10" path="res://Assets/Images/Exports/Goal.png" id="1_e6eho"]
+[ext_resource type="Script" path="res://Scripts/goal.gd" id="1_sx5gg"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_e78co"]
 friction = 0.3
 bounce = 0.5
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vl30a"]
+friction = 0.3
+bounce = 0.5
+
 [node name="Goal" type="StaticBody2D"]
 physics_material_override = SubResource("PhysicsMaterial_e78co")
+script = ExtResource("1_sx5gg")
 
 [node name="Goal" type="Sprite2D" parent="."]
 texture = ExtResource("1_e6eho")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="PuckDetector" type="Area2D" parent="."]
 
-[node name="CollisionPolygon" type="CollisionPolygon2D" parent="Area2D"]
+[node name="CollisionPolygon" type="CollisionPolygon2D" parent="PuckDetector"]
 polygon = PackedVector2Array(-61, -16, -61, -12, 61, -12, 61, -16, 44, -33, -44, -33)
 
 [node name="CollisionPolygon" type="CollisionPolygon2D" parent="."]
@@ -23,6 +29,9 @@ polygon = PackedVector2Array(-63, 36, -61, 36, -61, -16, -44, -33, 44, -33, 61, 
 [node name="LineCollision" type="StaticBody2D" parent="."]
 collision_layer = 2
 collision_mask = 2
+physics_material_override = SubResource("PhysicsMaterial_vl30a")
 
 [node name="CollisionPolygon" type="CollisionPolygon2D" parent="LineCollision"]
 polygon = PackedVector2Array(-62, 35, 62, 35, 62, 37, -62, 37)
+
+[connection signal="body_entered" from="PuckDetector" to="." method="_on_puck_detector_body_entered"]

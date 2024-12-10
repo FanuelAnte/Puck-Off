@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://e5hkh4em31ek"]
+[gd_scene load_steps=6 format=3 uid="uid://e5hkh4em31ek"]
 
 [ext_resource type="Script" path="res://Scripts/puck.gd" id="1_m3nwm"]
 [ext_resource type="Texture2D" uid="uid://n8e31b1115bg" path="res://Assets/Images/Exports/Puck.png" id="1_x5vt5"]
@@ -11,11 +11,8 @@ bounce = 1.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_yddhx"]
 radius = 24.0208
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_er7at"]
-radius = 24.0
-
 [node name="Puck" type="RigidBody2D" groups=["minimap_objects", "puck"]]
-mass = 0.1
+mass = 0.05
 physics_material_override = SubResource("PhysicsMaterial_vawho")
 gravity_scale = 0.0
 linear_damp = 0.05
@@ -29,8 +26,3 @@ texture = ExtResource("1_x5vt5")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_yddhx")
-
-[node name="DetectionArea" type="Area2D" parent="."]
-
-[node name="CollisionShape" type="CollisionShape2D" parent="DetectionArea"]
-shape = SubResource("CircleShape2D_er7at")

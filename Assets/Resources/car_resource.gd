@@ -7,10 +7,12 @@ class_name car_resource
 @export var engine_power: int = 600
 @export var boost_engine_power: int = 2400
 
-@export var max_speed: int = 350
+@export var max_speed: int = 400
 @export var boost_max_speed: int = 600
 
-@export var turn_speed: int = 1200
+@export var max_lateral_sliding_reduction: float = 0.9
+
+@export var turn_speed: int = 500
 @export var steering_graph: Curve
 
 @export var collider_height: int

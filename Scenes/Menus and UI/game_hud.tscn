@@ -20,17 +20,28 @@ theme = ExtResource("1_6xj3e")
 script = ExtResource("2_pnuaq")
 
 [node name="MiniMap" parent="." instance=ExtResource("4_ntiwu")]
-layout_mode = 0
-offset_left = 368.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -32.0
 offset_top = 2.0
-offset_right = 398.0
+offset_right = -2.0
 offset_bottom = 52.0
+grow_horizontal = 0
 
-[node name="Border" type="TextureRect" parent="."]
-layout_mode = 0
-offset_right = 400.0
-offset_bottom = 240.0
+[node name="Border" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("1_4v0fy")
+patch_margin_left = 96
+patch_margin_top = 118
+patch_margin_right = 97
+patch_margin_bottom = 30
 
 [node name="Score" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -38,10 +49,10 @@ offset_left = 2.0
 offset_top = 2.0
 offset_right = 81.0
 offset_bottom = 14.0
-theme_override_constants/separation = 16
+theme_override_constants/separation = 8
 alignment = 1
 
-[node name="DarkTeamScoreLbl2" type="Label" parent="Score"]
+[node name="DarkTeamScoreLbl" type="Label" parent="Score"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.333333, 0.333333, 0.407843, 1)

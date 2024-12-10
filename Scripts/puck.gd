@@ -7,7 +7,7 @@ var max_speed: int = 550
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	if state.linear_velocity.length() > max_speed:
 		state.linear_velocity = state.linear_velocity.normalized() * max_speed
-
+	
 func _ready() -> void:
 	pass
 	

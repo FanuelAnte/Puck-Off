@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://cu8i25l3tyckt"]
+[gd_scene load_steps=13 format=3 uid="uid://cu8i25l3tyckt"]
 
 [ext_resource type="Texture2D" uid="uid://cuxv7appbai5n" path="res://Assets/Images/Exports/Floor.png" id="1_066dw"]
+[ext_resource type="Script" path="res://Scripts/arena.gd" id="1_n8856"]
 [ext_resource type="Texture2D" uid="uid://bu178nycuy1yo" path="res://Assets/Images/Exports/FieldMarkings.png" id="2_vqfl5"]
 [ext_resource type="Texture2D" uid="uid://dudooy0pt776e" path="res://Assets/Images/Exports/DitheredShadow#1.png" id="3_5qi7q"]
 [ext_resource type="Texture2D" uid="uid://b0pc6ae05qdlb" path="res://Assets/Images/Exports/Border.png" id="3_wasgq"]
@@ -21,6 +22,7 @@ size = Vector2(1200, 64)
 size = Vector2(2000, 64)
 
 [node name="Arena" type="Node2D"]
+script = ExtResource("1_n8856")
 metadata/_edit_vertical_guides_ = [-600.0, -664.0]
 metadata/_edit_horizontal_guides_ = [-1000.0, -1064.0]
 
@@ -32,32 +34,36 @@ texture = ExtResource("1_066dw")
 z_index = -3
 texture = ExtResource("2_vqfl5")
 
-[node name="DitheredShadow#3" type="Sprite2D" parent="."]
+[node name="Shadows" type="Node2D" parent="."]
+
+[node name="DitheredShadow#3" type="Sprite2D" parent="Shadows"]
 light_mask = 8
 visibility_layer = 8
 material = SubResource("CanvasItemMaterial_k1w5r")
 texture = ExtResource("5_8gfqy")
 
-[node name="DitheredShadow#2" type="Sprite2D" parent="."]
+[node name="DitheredShadow#2" type="Sprite2D" parent="Shadows"]
 light_mask = 4
 visibility_layer = 4
 material = SubResource("CanvasItemMaterial_k1w5r")
 texture = ExtResource("4_lo54i")
 
-[node name="DitheredShadow" type="Sprite2D" parent="."]
+[node name="DitheredShadow" type="Sprite2D" parent="Shadows"]
 light_mask = 2
 visibility_layer = 2
 material = SubResource("CanvasItemMaterial_k1w5r")
 texture = ExtResource("3_5qi7q")
 
-[node name="Goal" parent="." instance=ExtResource("4_353oq")]
+[node name="LightGoal" parent="." instance=ExtResource("4_353oq")]
 z_index = 3
 position = Vector2(0, -784)
+team_color = "Light"
 
-[node name="Goal2" parent="." instance=ExtResource("4_353oq")]
+[node name="DarkGoal" parent="." instance=ExtResource("4_353oq")]
 z_index = 3
 position = Vector2(0, 784)
 rotation = -3.14159
+team_color = "Dark"
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 physics_material_override = SubResource("PhysicsMaterial_rgvl5")
@@ -102,3 +108,46 @@ polygon = PackedVector2Array(908.801, 16.0033, 908.799, 192.003, 1084.8, 16.004)
 position = Vector2(480, 1924.8)
 rotation = -1.5708
 polygon = PackedVector2Array(916.8, 128.003, 1092.8, 128.004, 916.8, -47.9967)
+
+[node name="StartingMarkers" type="Node2D" parent="."]
+
+[node name="LightTeamMakers" type="Node2D" parent="StartingMarkers"]
+
+[node name="LightP1" type="Marker2D" parent="StartingMarkers/LightTeamMakers"]
+unique_name_in_owner = true
+position = Vector2(0, -704)
+
+[node name="LightP2" type="Marker2D" parent="StartingMarkers/LightTeamMakers"]
+unique_name_in_owner = true
+position = Vector2(296, -704)
+
+[node name="LightP3" type="Marker2D" parent="StartingMarkers/LightTeamMakers"]
+unique_name_in_owner = true
+position = Vector2(-296, -704)
+
+[node name="DarkTeamMakers" type="Node2D" parent="StartingMarkers"]
+
+[node name="DarkP1" type="Marker2D" parent="StartingMarkers/DarkTeamMakers"]
+unique_name_in_owner = true
+position = Vector2(0, 704)
+
+[node name="DarkP2" type="Marker2D" parent="StartingMarkers/DarkTeamMakers"]
+unique_name_in_owner = true
+position = Vector2(296, 704)
+
+[node name="DarkP3" type="Marker2D" parent="StartingMarkers/DarkTeamMakers"]
+unique_name_in_owner = true
+position = Vector2(-296, 704)
+
+[node name="BallMarkers" type="Node2D" parent="StartingMarkers"]
+
+[node name="CenterBallMarker" type="Marker2D" parent="StartingMarkers/BallMarkers"]
+unique_name_in_owner = true
+
+[node name="LightBallMarker" type="Marker2D" parent="StartingMarkers/BallMarkers"]
+unique_name_in_owner = true
+position = Vector2(0, -248)
+
+[node name="DarkBallMarker" type="Marker2D" parent="StartingMarkers/BallMarkers"]
+unique_name_in_owner = true
+position = Vector2(0, 248)

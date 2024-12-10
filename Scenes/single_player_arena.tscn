@@ -1,11 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://o2eola0ps8vv"]
+[gd_scene load_steps=7 format=3 uid="uid://o2eola0ps8vv"]
 
 [ext_resource type="PackedScene" uid="uid://cu8i25l3tyckt" path="res://Scenes/arena.tscn" id="1_4o6c3"]
 [ext_resource type="PackedScene" uid="uid://c7uj206vl300a" path="res://Scenes/car_base.tscn" id="1_p6swa"]
-[ext_resource type="Resource" uid="uid://cc4lj0qtatwd" path="res://Assets/Resources/Cars/Charger.tres" id="3_7e7p2"]
+[ext_resource type="Script" path="res://Scripts/single_player_arena.gd" id="1_rtm6s"]
 [ext_resource type="PackedScene" uid="uid://e5hkh4em31ek" path="res://Scenes/puck.tscn" id="4_g5e5i"]
+[ext_resource type="Resource" uid="uid://cc4lj0qtatwd" path="res://Assets/Resources/Cars/Charger.tres" id="4_la7t0"]
+[ext_resource type="Resource" uid="uid://b4qsoftsu6a7d" path="res://Assets/Resources/Cars/GTI.tres" id="5_uknts"]
 
 [node name="SinglePlayerArena" type="Node2D"]
+script = ExtResource("1_rtm6s")
 metadata/_edit_vertical_guides_ = [-600.0, 600.0]
 metadata/_edit_horizontal_guides_ = [-1000.0, 1000.0]
 
@@ -16,9 +19,15 @@ metadata/_edit_horizontal_guides_ = [-1000.0, 1000.0]
 [node name="CarBase" parent="DarkTeam" instance=ExtResource("1_p6swa")]
 position = Vector2(0, 646)
 is_player = true
-car_resource_file = ExtResource("3_7e7p2")
-team_color = "Light"
+car_resource_file = ExtResource("4_la7t0")
+team_color = "Dark"
 
 [node name="LightTeam" type="Node2D" parent="."]
+
+[node name="CarBase2" parent="LightTeam" instance=ExtResource("1_p6swa")]
+position = Vector2(0, -647)
+rotation = -3.14159
+car_resource_file = ExtResource("5_uknts")
+team_color = "Light"
 
 [node name="Puck" parent="." instance=ExtResource("4_g5e5i")]
