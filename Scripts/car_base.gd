@@ -34,13 +34,15 @@ var right_direction: Vector2
 var max_lateral_sliding_reduction: float = 0
 var lateral_sliding_reduction: float = 0
 
+var reverse_speed_factor: float = 0
+
 var puck_position: Vector2
 var center_field_postion: Vector2 = Vector2(0, 0)
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	if state.linear_velocity.length() > max_speed:
 		state.linear_velocity = state.linear_velocity.normalized() * max_speed
-
+		
 func _ready() -> void:
 	center_of_mass = car_resource_file.center_of_mass_position
 	
@@ -68,12 +70,14 @@ func _ready() -> void:
 	max_lateral_sliding_reduction = car_resource_file.max_lateral_sliding_reduction
 	lateral_sliding_reduction = car_resource_file.max_lateral_sliding_reduction
 	
+	reverse_speed_factor = car_resource_file.reverse_speed_factor
+	
 func _physics_process(delta: float) -> void:
 	get_input(delta)
 	apply_central_force(velocity)
 	
-	var normalized_speed: float = snapped(remap(linear_velocity.length(), 0, max_speed, 0, 1), 0.01)
-	var dynamic_steering_factor: float = snapped(car_resource_file.steering_graph.sample(normalized_speed), 0.01)
+	var normalized_speed: float = snappedf(remap(linear_velocity.length(), 0, max_speed, 0, 1), 0.01)
+	var dynamic_steering_factor: float = snappedf(car_resource_file.steering_graph.sample(normalized_speed), 0.01)
 	
 	if linear_velocity.length() > 15:
 		apply_torque(turn_direction * turn_speed * dynamic_steering_factor)
@@ -87,7 +91,7 @@ func _physics_process(delta: float) -> void:
 func _process(delta: float) -> void:
 	if has_stalled and !stall_timer.is_stopped():
 		stall_progress_bar.show()
-		stall_progress_bar.value = remap(snapped(stall_timer.time_left, 0.01), 0, stall_timer.wait_time, 0, 100) 
+		stall_progress_bar.value = remap(snappedf(stall_timer.time_left, 0.01), 0, stall_timer.wait_time, 0, 100) 
 	else:
 		stall_progress_bar.hide()
 		
@@ -96,7 +100,7 @@ func _process(delta: float) -> void:
 	if is_player and SettingsGlobals.dynamic_zooming:
 		if clamp(linear_velocity.length(), 0, max_speed) > (max_speed)/2:
 			if !has_zoomed_out:
-				emit_signal("zoom_camera", Vector2(0.5, 0.5))
+				emit_signal("zoom_camera", Vector2(0.8, 0.8))
 				has_zoomed_out = true
 				has_zoomed_in = false
 		else:
@@ -111,25 +115,22 @@ func get_input(delta: float) -> void:
 			if Input.is_action_pressed("accelerate"):
 				velocity = transform.y * engine_power * -1
 			elif Input.is_action_pressed("decelerate"):
-				velocity = transform.y * engine_power * 0.8
+				velocity = transform.y * engine_power * reverse_speed_factor
 			else:
 				velocity = Vector2.ZERO
 			
 			if Input.is_action_pressed("right"):
 				turn_direction = 1
 				is_steering = true
-				angular_damp = 2
 			elif Input.is_action_pressed("left"):
 				turn_direction = -1
 				is_steering = true
-				angular_damp = 2
 			else:
 				turn_direction = 0
 				is_steering = false
-				angular_damp = 10
 				
 			if Input.is_action_pressed("engage drift"):
-				lateral_sliding_reduction = 0.05
+				lateral_sliding_reduction = 0
 			else:
 				if lateral_sliding_reduction <= max_lateral_sliding_reduction:
 					lateral_sliding_reduction += 0.1 * delta
@@ -141,23 +142,22 @@ func get_input(delta: float) -> void:
 		var direction: Vector2 = center_field_postion - self.global_position
 		
 		if !has_stalled:
-			if (puck_position - self.global_position).length() > 16:
+			if (puck_position - self.global_position).length() > 32:
 				if can_chase_ball:
 					direction = (puck_position - self.global_position)
 			else:
 				can_chase_ball = false
-				chase_timer.start(snapped(randf_range(1, 2), 0.05))
+				chase_timer.start(snappedf(randf_range(1, 3), 0.5))
 				
 			var angle: int = rad_to_deg(self.transform.y.angle_to(direction) * -1)
-			#print(angle)
 			
 			turn_direction = sign(angle) * 1
 			
-			if abs(angle) >= 160:
+			if abs(angle) >= 65:
 				velocity = transform.y * engine_power * -1
 				
-			elif abs(angle) < 160:
-				velocity = transform.y * engine_power * 0.8
+			elif abs(angle) < 65:
+				velocity = transform.y * engine_power * reverse_speed_factor
 				
 		else:
 			velocity = Vector2.ZERO
@@ -188,14 +188,14 @@ func _on_body_entered(body: Node) -> void:
 		shake_factor = remap(linear_velocity.length(), 0, max_speed, 0.5, 1)
 	
 	camera_shake(SettingsGlobals.shake_length_factor * shake_factor, SettingsGlobals.shake_power_factor * shake_factor)
-	
-	if !has_stalled:
-		if !body.is_in_group("puck"):
-			if linear_velocity.length() > (max_speed * 0.65):
-				has_stalled = true
-				angular_damp = 10
-				linear_damp = 2
-				stall_timer.start()
+		
+	#if !has_stalled:
+		#if body.is_in_group("arena"):
+			#if linear_velocity.length() > (max_speed * 0.6):
+				#has_stalled = true
+				#angular_damp = 15
+				#linear_damp = 5
+				#stall_timer.start()
 				
 func _on_chase_timer_timeout() -> void:
 	can_chase_ball = true

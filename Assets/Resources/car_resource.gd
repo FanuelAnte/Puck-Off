@@ -10,6 +10,8 @@ class_name car_resource
 @export var max_speed: int = 400
 @export var boost_max_speed: int = 600
 
+@export var reverse_speed_factor: float = 0.8
+
 @export var max_lateral_sliding_reduction: float = 0.9
 
 @export var turn_speed: int = 500

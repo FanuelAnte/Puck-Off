@@ -1,4 +1,5 @@
 - [x] Make the car irresponsive for a while after any collision with anything other than the puck.
 - [x] Match timer + display
 - [x] Scoring logic + scoreboard
-- [ ] CPU cars
+- [x] CPU cars
+- [ ] (optional) Make the cars not collide with the goal at all to avoid the AI getting stuck behind the goal. Or do complex pathfinding.

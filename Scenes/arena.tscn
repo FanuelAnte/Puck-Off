@@ -12,8 +12,8 @@
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_k1w5r"]
 light_mode = 2
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rgvl5"]
-bounce = 0.5
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f6ofs"]
+bounce = 0.8
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mcuwc"]
 size = Vector2(1200, 64)
@@ -65,46 +65,46 @@ position = Vector2(0, 784)
 rotation = -3.14159
 team_color = "Dark"
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-physics_material_override = SubResource("PhysicsMaterial_rgvl5")
+[node name="ArenaWall" type="StaticBody2D" parent="." groups=["arena"]]
+physics_material_override = SubResource("PhysicsMaterial_f6ofs")
 
-[node name="Border" type="Sprite2D" parent="StaticBody2D"]
+[node name="Border" type="Sprite2D" parent="ArenaWall"]
 texture = ExtResource("3_wasgq")
 
-[node name="CollisionShape" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape" type="CollisionShape2D" parent="ArenaWall"]
 position = Vector2(0, -1032)
 shape = SubResource("RectangleShape2D_mcuwc")
 
-[node name="CollisionShape2" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2" type="CollisionShape2D" parent="ArenaWall"]
 position = Vector2(0, 1032)
 shape = SubResource("RectangleShape2D_mcuwc")
 
-[node name="CollisionShape3" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape3" type="CollisionShape2D" parent="ArenaWall"]
 position = Vector2(632, 0)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_82i1t")
 
-[node name="CollisionShape4" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape4" type="CollisionShape2D" parent="ArenaWall"]
 position = Vector2(-632, -5.65592e-11)
 rotation = -1.5708
 shape = SubResource("RectangleShape2D_82i1t")
 
-[node name="CollisionShape5" type="CollisionPolygon2D" parent="StaticBody2D"]
+[node name="CollisionShape5" type="CollisionPolygon2D" parent="ArenaWall"]
 position = Vector2(-624, -8)
 rotation = -1.5708
 polygon = PackedVector2Array(824, 16.003, 999.999, 192.004, 1000, 16.0036)
 
-[node name="CollisionShape6" type="CollisionPolygon2D" parent="StaticBody2D"]
+[node name="CollisionShape6" type="CollisionPolygon2D" parent="ArenaWall"]
 position = Vector2(480, 0)
 rotation = -1.5708
 polygon = PackedVector2Array(832, 128.003, 1008, 128.004, 1008, -47.9963)
 
-[node name="CollisionShape7" type="CollisionPolygon2D" parent="StaticBody2D"]
+[node name="CollisionShape7" type="CollisionPolygon2D" parent="ArenaWall"]
 position = Vector2(-624, 1916.8)
 rotation = -1.5708
 polygon = PackedVector2Array(908.801, 16.0033, 908.799, 192.003, 1084.8, 16.004)
 
-[node name="CollisionShape8" type="CollisionPolygon2D" parent="StaticBody2D"]
+[node name="CollisionShape8" type="CollisionPolygon2D" parent="ArenaWall"]
 position = Vector2(480, 1924.8)
 rotation = -1.5708
 polygon = PackedVector2Array(916.8, 128.003, 1092.8, 128.004, 916.8, -47.9967)

@@ -10,8 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://33xsj3q2tie8" path="res://Assets/Images/Exports/StallProgressBarP.png" id="7_4tk2r"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ykmfs"]
-friction = 0.1
-bounce = 0.5
+bounce = 0.9
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sojpy"]
 radius = 7.0
@@ -28,8 +27,8 @@ physics_material_override = SubResource("PhysicsMaterial_ykmfs")
 gravity_scale = 0.0
 center_of_mass_mode = 1
 contact_monitor = true
-max_contacts_reported = 50
-angular_damp = 2.0
+max_contacts_reported = 100
+angular_damp = 3.0
 script = ExtResource("1_wftrv")
 
 [node name="ShadowCasterLight" parent="." instance=ExtResource("2_desb0")]
@@ -92,7 +91,7 @@ one_shot = true
 
 [node name="ChaseTimer" type="Timer" parent="."]
 unique_name_in_owner = true
-wait_time = 3.0
+wait_time = 2.0
 one_shot = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -14,6 +14,7 @@ engine_power = 600
 boost_engine_power = 2400
 max_speed = 350
 boost_max_speed = 600
+reverse_speed_factor = 0.7
 max_lateral_sliding_reduction = 0.5
 turn_speed = 1500
 steering_graph = SubResource("Curve_sb1j1")

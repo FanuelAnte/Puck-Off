@@ -10,10 +10,11 @@ metadata/_snap_enabled = true
 [resource]
 script = ExtResource("1_5x3j7")
 car_name = "GTI"
-engine_power = 600
+engine_power = 530
 boost_engine_power = 2400
-max_speed = 350
+max_speed = 320
 boost_max_speed = 600
+reverse_speed_factor = 0.75
 max_lateral_sliding_reduction = 0.3
 turn_speed = 1200
 steering_graph = SubResource("Curve_5axiq")
