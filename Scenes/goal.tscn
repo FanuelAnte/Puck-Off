@@ -13,6 +13,7 @@ bounce = 0.5
 [node name="Goal" type="StaticBody2D" groups=["arena"]]
 physics_material_override = SubResource("PhysicsMaterial_e78co")
 script = ExtResource("1_sx5gg")
+metadata/_edit_horizontal_guides_ = [-24.0]
 
 [node name="Goal" type="Sprite2D" parent="."]
 texture = ExtResource("1_e6eho")
@@ -20,7 +21,7 @@ texture = ExtResource("1_e6eho")
 [node name="PuckDetector" type="Area2D" parent="."]
 
 [node name="CollisionPolygon" type="CollisionPolygon2D" parent="PuckDetector"]
-polygon = PackedVector2Array(-61, -16, -61, -12, 61, -12, 61, -16, 44, -33, -44, -33)
+polygon = PackedVector2Array(-58, -19, 58, -19, 44, -33, -44, -33)
 
 [node name="CollisionPolygon" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-63, 36, -61, 36, -61, -16, -44, -33, 44, -33, 61, -16, 61, 36, 63, 36, 63, -17, 45, -35, -45, -35, -63, -17)

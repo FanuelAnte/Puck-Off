@@ -9,16 +9,20 @@ friction = 0.0
 bounce = 1.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yddhx"]
-radius = 24.0208
+radius = 26.0
 
 [node name="Puck" type="RigidBody2D" groups=["minimap_objects", "puck"]]
-mass = 0.05
+mass = 0.01
 physics_material_override = SubResource("PhysicsMaterial_vawho")
 gravity_scale = 0.0
-linear_damp = 0.05
+continuous_cd = 2
+contact_monitor = true
+max_contacts_reported = 100
+linear_damp = 0.15
 script = ExtResource("1_m3nwm")
 
 [node name="ShadowCasterLight" parent="." instance=ExtResource("2_r5mih")]
+is_puck = true
 
 [node name="PuckSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true

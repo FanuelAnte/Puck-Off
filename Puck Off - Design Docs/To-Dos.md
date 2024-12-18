@@ -3,3 +3,4 @@
 - [x] Scoring logic + scoreboard
 - [x] CPU cars
 - [ ] (optional) Make the cars not collide with the goal at all to avoid the AI getting stuck behind the goal. Or do complex pathfinding.
+- [ ] Menu design and implementation

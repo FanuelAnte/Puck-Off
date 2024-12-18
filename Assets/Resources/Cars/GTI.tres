@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Assets/Resources/car_resource.gd" id="1_5x3j7"]
 
 [sub_resource type="Curve" id="Curve_5axiq"]
-_data = [Vector2(0, 0), 0.0, 1.0, 0, 1, Vector2(1, 1), 1.0, 0.0, 1, 0]
+_data = [Vector2(0, 0), 0.0, 1.55607, 0, 0, Vector2(1, 1), 1.0, 0.0, 1, 0]
 point_count = 2
 metadata/_snap_enabled = true
 
@@ -16,7 +16,7 @@ max_speed = 320
 boost_max_speed = 600
 reverse_speed_factor = 0.75
 max_lateral_sliding_reduction = 0.3
-turn_speed = 1200
+turn_speed = 900
 steering_graph = SubResource("Curve_5axiq")
 collider_height = 26
 bumper_collider_position = Vector2(0, -11)

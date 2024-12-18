@@ -2,15 +2,15 @@
 
 [ext_resource type="Texture2D" uid="uid://i1jivjds07yx" path="res://Assets/Images/Exports/Cars.png" id="1_b4bhw"]
 [ext_resource type="Script" path="res://Scripts/car_base.gd" id="1_wftrv"]
-[ext_resource type="PackedScene" uid="uid://cqorc0qwbsdxy" path="res://Scenes/camera.tscn" id="2_6ak6t"]
 [ext_resource type="PackedScene" uid="uid://b4ktg600sax46" path="res://Scenes/shadow_caster_light.tscn" id="2_desb0"]
 [ext_resource type="PackedScene" uid="uid://vfuutxbcsjo" path="res://Scenes/trail.tscn" id="3_t7ybf"]
+[ext_resource type="PackedScene" uid="uid://b8edqijh4uv6m" path="res://Scenes/camera_marker.tscn" id="3_wb5he"]
 [ext_resource type="PackedScene" uid="uid://dj4ln2uuamw7g" path="res://Scenes/ball_indicator.tscn" id="4_jylo6"]
 [ext_resource type="Texture2D" uid="uid://cak3sr0yxf3wr" path="res://Assets/Images/Exports/StallProgressBarU.png" id="6_iqoix"]
 [ext_resource type="Texture2D" uid="uid://33xsj3q2tie8" path="res://Assets/Images/Exports/StallProgressBarP.png" id="7_4tk2r"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ykmfs"]
-bounce = 0.9
+bounce = 0.5
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sojpy"]
 radius = 7.0
@@ -26,12 +26,17 @@ collision_mask = 3
 physics_material_override = SubResource("PhysicsMaterial_ykmfs")
 gravity_scale = 0.0
 center_of_mass_mode = 1
+continuous_cd = 2
 contact_monitor = true
 max_contacts_reported = 100
 angular_damp = 3.0
 script = ExtResource("1_wftrv")
 
 [node name="ShadowCasterLight" parent="." instance=ExtResource("2_desb0")]
+unique_name_in_owner = true
+
+[node name="CameraMarker" parent="." instance=ExtResource("3_wb5he")]
+unique_name_in_owner = true
 
 [node name="StallProgressBar" type="TextureProgressBar" parent="."]
 unique_name_in_owner = true
@@ -44,9 +49,6 @@ value = 34.0
 fill_mode = 4
 texture_under = ExtResource("6_iqoix")
 texture_progress = ExtResource("7_4tk2r")
-
-[node name="Camera" parent="." instance=ExtResource("2_6ak6t")]
-unique_name_in_owner = true
 
 [node name="CarSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
@@ -86,7 +88,6 @@ max_trail_length = 25
 
 [node name="StallTimer" type="Timer" parent="."]
 unique_name_in_owner = true
-wait_time = 2.0
 one_shot = true
 
 [node name="ChaseTimer" type="Timer" parent="."]

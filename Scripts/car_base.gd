@@ -8,6 +8,8 @@ extends RigidBody2D
 @onready var body_collider: CollisionShape2D = %BodyCollider
 @onready var bumper_collider: CollisionShape2D = %BumperCollider
 @onready var chase_timer: Timer = %ChaseTimer
+#@onready var camera_marker: Marker2D = %CameraMarker
+@onready var shadow_caster_light: Node2D = %ShadowCasterLight
 
 @export var is_player: bool = false
 @export var car_resource_file: Resource
@@ -89,16 +91,21 @@ func _physics_process(delta: float) -> void:
 	linear_velocity -= lateral_velocity * lateral_sliding_reduction
 	
 func _process(delta: float) -> void:
-	if has_stalled and !stall_timer.is_stopped():
-		stall_progress_bar.show()
-		stall_progress_bar.value = remap(snappedf(stall_timer.time_left, 0.01), 0, stall_timer.wait_time, 0, 100) 
-	else:
-		stall_progress_bar.hide()
-		
+	#if has_stalled and !stall_timer.is_stopped():
+		#stall_progress_bar.show()
+		#stall_progress_bar.value = remap(snappedf(stall_timer.time_left, 0.01), 0, stall_timer.wait_time, 0, 100) 
+	#else:
+		#stall_progress_bar.hide()
+	
 	puck_position = get_tree().get_nodes_in_group("puck")[0].global_position
 	
+	#var direction: Vector2 = (puck_position - center_marker.global_position).normalized()
+	#var target_angle: float = direction.angle()
+	
+	#camera_marker.global_rotation = lerp_angle(camera_marker.global_rotation, target_angle, 2 * delta)
+	
 	if is_player and SettingsGlobals.dynamic_zooming:
-		if clamp(linear_velocity.length(), 0, max_speed) > (max_speed)/2:
+		if clamp(linear_velocity.length(), 0, max_speed) > (max_speed) / 2:
 			if !has_zoomed_out:
 				emit_signal("zoom_camera", Vector2(0.8, 0.8))
 				has_zoomed_out = true
@@ -118,11 +125,22 @@ func get_input(delta: float) -> void:
 				velocity = transform.y * engine_power * reverse_speed_factor
 			else:
 				velocity = Vector2.ZERO
+				
+			var accelerometer_x: float = snappedf(clamp(Input.get_accelerometer().x, -1, 1), 0.1)
 			
-			if Input.is_action_pressed("right"):
-				turn_direction = 1
+			if Input.is_action_pressed("right") or accelerometer_x >= 0.5:
+				if OS.get_name() == "Android":
+					turn_direction = 1 * abs(accelerometer_x)
+				else:
+					turn_direction = 1
+					
 				is_steering = true
-			elif Input.is_action_pressed("left"):
+			elif Input.is_action_pressed("left")  or accelerometer_x <= -0.5:
+				if OS.get_name() == "Android":
+					turn_direction = -1 * abs(accelerometer_x)
+				else:
+					turn_direction = -1
+				
 				turn_direction = -1
 				is_steering = true
 			else:
@@ -153,10 +171,11 @@ func get_input(delta: float) -> void:
 			
 			turn_direction = sign(angle) * 1
 			
-			if abs(angle) >= 65:
+			# TODO: Fix the AI getting stuck behind the goals.
+			if abs(angle) >= 90:
 				velocity = transform.y * engine_power * -1
 				
-			elif abs(angle) < 65:
+			elif abs(angle) < 90:
 				velocity = transform.y * engine_power * reverse_speed_factor
 				
 		else:
@@ -176,8 +195,9 @@ func _on_zoom_camera(zoom_value: Vector2) -> void:
 	
 func _on_stall_timer_timeout() -> void:
 	has_stalled = false
-	angular_damp = 2
-	linear_damp = 1
+	shadow_caster_light.car_has_stalled = false
+	angular_damp = 3
+	linear_damp = 0
 	
 func _on_body_entered(body: Node) -> void:
 	var shake_factor: float = 0
@@ -189,13 +209,15 @@ func _on_body_entered(body: Node) -> void:
 	
 	camera_shake(SettingsGlobals.shake_length_factor * shake_factor, SettingsGlobals.shake_power_factor * shake_factor)
 		
-	#if !has_stalled:
-		#if body.is_in_group("arena"):
-			#if linear_velocity.length() > (max_speed * 0.6):
-				#has_stalled = true
-				#angular_damp = 15
-				#linear_damp = 5
-				#stall_timer.start()
+	if !has_stalled:
+		# TODO: Separate the check for car bodies.
+		if body.is_in_group("arena") or body.is_in_group("car"):
+			if linear_velocity.length() > (max_speed * 0.6):
+				has_stalled = true
+				shadow_caster_light.car_has_stalled = true
+				angular_damp = 6
+				linear_damp = 2
+				stall_timer.start()
 				
 func _on_chase_timer_timeout() -> void:
 	can_chase_ball = true

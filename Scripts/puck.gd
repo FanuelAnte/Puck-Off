@@ -2,7 +2,7 @@ extends RigidBody2D
 
 @onready var puck_sprite: Sprite2D = %PuckSprite
 
-var max_speed: int = 550
+var max_speed: int = 600
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	if state.linear_velocity.length() > max_speed:

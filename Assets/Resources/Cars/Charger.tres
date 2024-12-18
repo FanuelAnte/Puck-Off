@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Assets/Resources/car_resource.gd" id="1_qk5cb"]
 
 [sub_resource type="Curve" id="Curve_sb1j1"]
-_data = [Vector2(0, 0), 0.0, 1.0, 0, 1, Vector2(1, 1), 1.0, 0.0, 1, 0]
+_data = [Vector2(0, 0), 0.0, 1.87221, 0, 0, Vector2(1, 1), 0.562536, 0.0, 0, 0]
 point_count = 2
 metadata/_snap_enabled = true
 

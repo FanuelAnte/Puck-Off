@@ -38,10 +38,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_4v0fy")
-patch_margin_left = 176
+patch_margin_left = 96
 patch_margin_top = 118
-patch_margin_right = 192
+patch_margin_right = 160
 patch_margin_bottom = 46
+metadata/_edit_lock_ = true
 
 [node name="Score" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -72,6 +73,26 @@ theme_override_colors/font_color = Color(0.913725, 0.937255, 0.92549, 1)
 theme_override_font_sizes/font_size = 6
 text = "00"
 
+[node name="Accel" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -144.0
+offset_top = 2.0
+offset_right = -72.0
+offset_bottom = 14.0
+grow_horizontal = 0
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="AccelLbl" type="Label" parent="Accel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.913725, 0.937255, 0.92549, 1)
+theme_override_font_sizes/font_size = 6
+text = "-"
+
 [node name="Time" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 3
@@ -96,55 +117,70 @@ theme_override_font_sizes/font_size = 6
 text = "00:00:00"
 
 [node name="DPad" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 16.0
-offset_top = -48.0
-offset_right = 96.0
-offset_bottom = -16.0
+offset_left = 32.0
+offset_top = -96.0
+offset_right = 240.0
+offset_bottom = -32.0
 grow_vertical = 0
+metadata/_edit_group_ = true
 
 [node name="DPadLeft" type="TouchScreenButton" parent="DPad"]
-position = Vector2(0, 32.0002)
+visible = false
+position = Vector2(1.90735e-06, 64)
 rotation = -1.57079
 texture_normal = ExtResource("5_x8cq7")
 texture_pressed = ExtResource("6_saq3x")
 passby_press = true
 action = "left"
+visibility_mode = 1
+
+[node name="DPadDrift" type="TouchScreenButton" parent="DPad"]
+position = Vector2(136, 64)
+rotation = 3.14159
+texture_normal = ExtResource("5_x8cq7")
+texture_pressed = ExtResource("6_saq3x")
+passby_press = true
+action = "engage drift"
+visibility_mode = 1
 
 [node name="DPadRight" type="TouchScreenButton" parent="DPad"]
-position = Vector2(80, 0)
-rotation = -4.71238
+visible = false
+position = Vector2(208, 0)
+rotation = 1.57081
 texture_normal = ExtResource("5_x8cq7")
 texture_pressed = ExtResource("6_saq3x")
 passby_press = true
 action = "right"
+visibility_mode = 1
 
 [node name="ActionButtons" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -48.0
-offset_top = -94.0
-offset_right = -16.0
-offset_bottom = -24.0
+offset_left = -96.0
+offset_top = -176.0
+offset_right = -32.0
+offset_bottom = -40.0
 grow_horizontal = 0
 grow_vertical = 0
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
 [node name="AButton" type="TouchScreenButton" parent="ActionButtons"]
-position = Vector2(0, 30)
+position = Vector2(0.000610352, 64)
 rotation = -1.57079
 texture_normal = ExtResource("7_ghbbp")
 texture_pressed = ExtResource("8_pxvvb")
 passby_press = true
 action = "accelerate"
+visibility_mode = 1
 
 [node name="ALbl" type="Label" parent="ActionButtons"]
 layout_mode = 1
@@ -153,10 +189,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 4.0
-offset_top = -17.0
-offset_right = 10.0
-offset_bottom = -11.0
+offset_left = -16.0
+offset_top = -28.0
+offset_right = -10.0
+offset_bottom = -19.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.129412, 0.117647, 0.12549, 1)
@@ -164,12 +200,13 @@ theme_override_font_sizes/font_size = 6
 text = "A"
 
 [node name="ZButton" type="TouchScreenButton" parent="ActionButtons"]
-position = Vector2(32, 38)
+position = Vector2(64.0006, 72)
 rotation = -4.71238
 texture_normal = ExtResource("7_ghbbp")
 texture_pressed = ExtResource("8_pxvvb")
 passby_press = true
 action = "decelerate"
+visibility_mode = 1
 
 [node name="ZLbl" type="Label" parent="ActionButtons"]
 layout_mode = 1
@@ -178,10 +215,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 4.0
-offset_top = 23.0
-offset_right = 10.0
-offset_bottom = 29.0
+offset_left = -16.0
+offset_top = 44.0
+offset_right = -10.0
+offset_bottom = 53.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.129412, 0.117647, 0.12549, 1)
@@ -189,6 +226,7 @@ theme_override_font_sizes/font_size = 6
 text = "Z"
 
 [connection signal="pressed" from="DPad/DPadLeft" to="." method="_on_d_pad_left_pressed"]
+[connection signal="pressed" from="DPad/DPadDrift" to="." method="_on_d_pad_right_pressed"]
 [connection signal="pressed" from="DPad/DPadRight" to="." method="_on_d_pad_right_pressed"]
 [connection signal="pressed" from="ActionButtons/AButton" to="." method="_on_a_button_pressed"]
 [connection signal="pressed" from="ActionButtons/ZButton" to="." method="_on_z_button_pressed"]
