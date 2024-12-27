@@ -2,9 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://i1jivjds07yx" path="res://Assets/Images/Exports/Cars.png" id="1_b4bhw"]
 [ext_resource type="Script" path="res://Scripts/car_base.gd" id="1_wftrv"]
+[ext_resource type="PackedScene" uid="uid://cqorc0qwbsdxy" path="res://Scenes/camera.tscn" id="2_6ak6t"]
 [ext_resource type="PackedScene" uid="uid://b4ktg600sax46" path="res://Scenes/shadow_caster_light.tscn" id="2_desb0"]
 [ext_resource type="PackedScene" uid="uid://vfuutxbcsjo" path="res://Scenes/trail.tscn" id="3_t7ybf"]
-[ext_resource type="PackedScene" uid="uid://b8edqijh4uv6m" path="res://Scenes/camera_marker.tscn" id="3_wb5he"]
 [ext_resource type="PackedScene" uid="uid://dj4ln2uuamw7g" path="res://Scenes/ball_indicator.tscn" id="4_jylo6"]
 [ext_resource type="Texture2D" uid="uid://cak3sr0yxf3wr" path="res://Assets/Images/Exports/StallProgressBarU.png" id="6_iqoix"]
 [ext_resource type="Texture2D" uid="uid://33xsj3q2tie8" path="res://Assets/Images/Exports/StallProgressBarP.png" id="7_4tk2r"]
@@ -35,8 +35,12 @@ script = ExtResource("1_wftrv")
 [node name="ShadowCasterLight" parent="." instance=ExtResource("2_desb0")]
 unique_name_in_owner = true
 
-[node name="CameraMarker" parent="." instance=ExtResource("3_wb5he")]
+[node name="CameraMarker" type="Marker2D" parent="."]
 unique_name_in_owner = true
+
+[node name="Camera" parent="CameraMarker" instance=ExtResource("2_6ak6t")]
+unique_name_in_owner = true
+position = Vector2(128, 0)
 
 [node name="StallProgressBar" type="TextureProgressBar" parent="."]
 unique_name_in_owner = true
@@ -76,13 +80,11 @@ position = Vector2(0, 3)
 position = Vector2(-6, 8)
 
 [node name="Trail" parent="TireTracksParent/Marker3" instance=ExtResource("3_t7ybf")]
-max_trail_length = 25
 
 [node name="Marker4" type="Marker2D" parent="TireTracksParent"]
 position = Vector2(6, 8)
 
 [node name="Trail2" parent="TireTracksParent/Marker4" instance=ExtResource("3_t7ybf")]
-max_trail_length = 25
 
 [node name="BallIndicator" parent="." instance=ExtResource("4_jylo6")]
 

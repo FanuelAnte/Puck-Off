@@ -8,7 +8,7 @@ extends RigidBody2D
 @onready var body_collider: CollisionShape2D = %BodyCollider
 @onready var bumper_collider: CollisionShape2D = %BumperCollider
 @onready var chase_timer: Timer = %ChaseTimer
-#@onready var camera_marker: Marker2D = %CameraMarker
+@onready var camera_marker: Marker2D = %CameraMarker
 @onready var shadow_caster_light: Node2D = %ShadowCasterLight
 
 @export var is_player: bool = false
@@ -99,10 +99,10 @@ func _process(delta: float) -> void:
 	
 	puck_position = get_tree().get_nodes_in_group("puck")[0].global_position
 	
-	#var direction: Vector2 = (puck_position - center_marker.global_position).normalized()
-	#var target_angle: float = direction.angle()
+	var direction: Vector2 = (puck_position - center_marker.global_position).normalized()
+	var target_angle: float = direction.angle()
 	
-	#camera_marker.global_rotation = lerp_angle(camera_marker.global_rotation, target_angle, 2 * delta)
+	camera_marker.global_rotation = lerp_angle(camera_marker.global_rotation, target_angle, 1 * delta)
 	
 	if is_player and SettingsGlobals.dynamic_zooming:
 		if clamp(linear_velocity.length(), 0, max_speed) > (max_speed) / 2:
@@ -160,7 +160,7 @@ func get_input(delta: float) -> void:
 		var direction: Vector2 = center_field_postion - self.global_position
 		
 		if !has_stalled:
-			if (puck_position - self.global_position).length() > 32:
+			if (puck_position - self.global_position).length() > 64:
 				if can_chase_ball:
 					direction = (puck_position - self.global_position)
 			else:

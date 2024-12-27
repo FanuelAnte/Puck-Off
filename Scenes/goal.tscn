@@ -13,7 +13,7 @@ bounce = 0.5
 [node name="Goal" type="StaticBody2D" groups=["arena"]]
 physics_material_override = SubResource("PhysicsMaterial_e78co")
 script = ExtResource("1_sx5gg")
-metadata/_edit_horizontal_guides_ = [-24.0]
+metadata/_edit_horizontal_guides_ = [-24.0, -14.0]
 
 [node name="Goal" type="Sprite2D" parent="."]
 texture = ExtResource("1_e6eho")
@@ -21,10 +21,10 @@ texture = ExtResource("1_e6eho")
 [node name="PuckDetector" type="Area2D" parent="."]
 
 [node name="CollisionPolygon" type="CollisionPolygon2D" parent="PuckDetector"]
-polygon = PackedVector2Array(-58, -19, 58, -19, 44, -33, -44, -33)
+polygon = PackedVector2Array(-77, -14, 77, -14, 77, -16, 60, -33, -60, -33, -77, -16)
 
 [node name="CollisionPolygon" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-63, 36, -61, 36, -61, -16, -44, -33, 44, -33, 61, -16, 61, 36, 63, 36, 63, -17, 45, -35, -45, -35, -63, -17)
+polygon = PackedVector2Array(-79, 36, -77, 36, -77, -16, -60, -33, 60, -33, 77, -16, 77, 36, 79, 36, 79, -17, 61, -35, -61, -35, -79, -17)
 
 [node name="LineCollision" type="StaticBody2D" parent="."]
 collision_layer = 2
@@ -32,6 +32,6 @@ collision_mask = 2
 physics_material_override = SubResource("PhysicsMaterial_vl30a")
 
 [node name="CollisionPolygon" type="CollisionPolygon2D" parent="LineCollision"]
-polygon = PackedVector2Array(-62, 35, 62, 35, 62, 37, -62, 37)
+polygon = PackedVector2Array(-78, 35, 78, 35, 78, 37, -78, 37)
 
 [connection signal="body_entered" from="PuckDetector" to="." method="_on_puck_detector_body_entered"]
