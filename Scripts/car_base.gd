@@ -102,7 +102,7 @@ func _process(delta: float) -> void:
 	var direction: Vector2 = (puck_position - center_marker.global_position).normalized()
 	var target_angle: float = direction.angle()
 	
-	camera_marker.global_rotation = lerp_angle(camera_marker.global_rotation, target_angle, 1 * delta)
+	camera_marker.global_rotation = lerp_angle(camera_marker.global_rotation, target_angle, 3 * delta)
 	
 	if is_player and SettingsGlobals.dynamic_zooming:
 		if clamp(linear_velocity.length(), 0, max_speed) > (max_speed) / 2:
@@ -191,7 +191,7 @@ func camera_shake(length: float, power: float) -> void:
 	
 func _on_zoom_camera(zoom_value: Vector2) -> void:
 	var tween: Tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
-	tween.tween_property(camera, "zoom", zoom_value, 2)
+	tween.tween_property(camera, "zoom", zoom_value, 1)
 	
 func _on_stall_timer_timeout() -> void:
 	has_stalled = false

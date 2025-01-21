@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://c7uj206vl300a"]
+[gd_scene load_steps=13 format=3 uid="uid://c7uj206vl300a"]
 
 [ext_resource type="Texture2D" uid="uid://i1jivjds07yx" path="res://Assets/Images/Exports/Cars.png" id="1_b4bhw"]
 [ext_resource type="Script" path="res://Scripts/car_base.gd" id="1_wftrv"]
 [ext_resource type="PackedScene" uid="uid://cqorc0qwbsdxy" path="res://Scenes/camera.tscn" id="2_6ak6t"]
 [ext_resource type="PackedScene" uid="uid://b4ktg600sax46" path="res://Scenes/shadow_caster_light.tscn" id="2_desb0"]
+[ext_resource type="Texture2D" uid="uid://buprl7mfvp748" path="res://icon.svg" id="3_ncgp4"]
 [ext_resource type="PackedScene" uid="uid://vfuutxbcsjo" path="res://Scenes/trail.tscn" id="3_t7ybf"]
 [ext_resource type="PackedScene" uid="uid://dj4ln2uuamw7g" path="res://Scenes/ball_indicator.tscn" id="4_jylo6"]
 [ext_resource type="Texture2D" uid="uid://cak3sr0yxf3wr" path="res://Assets/Images/Exports/StallProgressBarU.png" id="6_iqoix"]
@@ -37,6 +38,12 @@ unique_name_in_owner = true
 
 [node name="CameraMarker" type="Marker2D" parent="."]
 unique_name_in_owner = true
+
+[node name="Icon" type="Sprite2D" parent="CameraMarker"]
+visible = false
+position = Vector2(128, 0)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_ncgp4")
 
 [node name="Camera" parent="CameraMarker" instance=ExtResource("2_6ak6t")]
 unique_name_in_owner = true
